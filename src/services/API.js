@@ -1,28 +1,36 @@
+import { url, apiKey,AUTH_KEY } from "helpers/constants.js";
 import axios from "axios";;
 
-
-const apiKey = '0bb5e486969da0e081671e4e0fafc6ed';
-const ulr = 'https://api.themoviedb.org/3';
-
-//  список найпопулярніших фільмів на сьогодні для створення колекції на головній сторінці
+// список найпопулярніших фільмів на сьогодні для створення колекції на головній сторінці
+const options = {
+  method: 'GET',
+  url: `${url}/trending/movie/day`,
+  params: {language: 'en-US', api_key: apiKey},
+  headers: {
+    accept: 'application/json',
+    Authorization: `Bearer ${AUTH_KEY}`
+  }
+};
 
 export const getTrendingMovies = async () => {
   try {
-    const { data } = await axios.get(`${ulr}/trending/movie/day?api_key=${apiKey}`)
-
+    const  data = await axios.request(options);
     return data;
+    
   }
   catch (error) {
-    console.log('Error during fetch:',error);
+    console.error('Error during fetch:', error);
   }
 }
+
+
 
 
 // пошук фільму за ключовим словом на сторінці фільмів
 
 export const getSearchMovies = async (query) => {
   try {
-    const { data } = await axios.get(`${ulr}/search/movie?api_key=${apiKey}&query=${query}`)
+    const data = await axios.get(`${url}/search/movie?api_key=${apiKey}&query=${query}`)
     return data;
   }
   catch (error) {
@@ -34,7 +42,7 @@ export const getSearchMovies = async (query) => {
 // запит повної інформації про фільм для сторінки кінофільму
 export const getMovieInfo = async (id) => {
   try {
-  const { data } = await axios.get(`${ulr}/movie/${id}?api_key=${apiKey}`)
+  const data = await axios.get(`${url}/movie/${id}?api_key=${apiKey}`)
     return data;
 }
 catch (error) {
@@ -47,7 +55,7 @@ catch (error) {
 
 export const getMovieCast = async (id) => {
   try {
-  const { data } = await axios.get(`${ulr}/movie/${id}/credits?api_key=${apiKey}`);
+  const data = await axios.get(`${url}/movie/${id}/credits?api_key=${apiKey}`);
   return data.cast;
 }catch (error) {
   console.log('Error during fetch:',error);
@@ -59,7 +67,7 @@ export const getMovieCast = async (id) => {
 
 export const getMovieReviews = async (id) => {
   try {
-  const { data } = await axios.get(`${ulr}/movie/${id}/reviews?api_key=${apiKey}`);
+  const { data } = await axios.get(`${url}/movie/${id}/reviews?api_key=${apiKey}`);
   return data.results;
 }
 catch (error) {

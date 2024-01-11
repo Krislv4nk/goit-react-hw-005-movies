@@ -1,0 +1,32 @@
+.moviesListContainer {
+    padding: 15px;
+    margin: 0;
+    
+}
+.pageTitle {
+    text-align: center;
+    margin: 20px;
+    font-size: 36px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    
+}
+.moviesList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    list-style: none;
+}
+/* .moviesListItem {
+    display: flex;
+} */
+.moviesListImg {
+    width: 200px;
+    height: 300px;
+}
+.moviesListTitle {
+    font-weight: 500;
+    width: 200px;
+}
