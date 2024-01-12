@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-import {getTrendingMovies } from '../services/API'
-import {MoviesList} from 'components/moviesGallery/moviesGallery'
+import { getTrendingMovies } from '../services/API';
+import { MoviesList } from 'components/moviesGallery/moviesGallery';
 
 
 const Home = () => {
@@ -19,11 +19,10 @@ const Home = () => {
       .catch(error => {
         console.error('Error:', error);
       })
-  })
+  }, []);
   return (
     <div>
-      <h1>Home</h1>
-          
+      <Home />
           <MoviesList movies={movies} />
     </div>
   );

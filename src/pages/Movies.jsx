@@ -1,13 +1,13 @@
 import React from "react";
 
+import{ SearchMovie } from "components/SearchMovie/SearchMovie";
 
 
 const Movies = () => {
-
+  
+  
     return (
-        <div>
-            <h1>Movies</h1>
-        </div>
+        <SearchMovie />
     );
 }
 export default Movies;
