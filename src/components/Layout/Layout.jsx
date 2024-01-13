@@ -9,16 +9,22 @@ export  const Layout = ({ children }) => {
             <header className={css.header}>
                 <nav>
                     <ul className={css.headerList}>
-                        <li ><NavLink className={css.headerItem} to="/" end>Home</NavLink></li>
-                        <li ><NavLink className={css.headerItem} to="/movies">Movies</NavLink></li>
-                        <li ><NavLink className={css.headerItem} to="/movies/:movieId">MovieDetails</NavLink></li>
+                        <li ><NavLink className={({ isActive }) =>
+            `${css.headerItem} ${isActive ? css.active : ''}`
+          } to="/" end>Home</NavLink></li>
+                        <li ><NavLink className={({ isActive }) =>
+            `${css.headerItem} ${isActive ? css.active : ''}`
+          } to="/movies">Movies</NavLink></li>
+                        <li ><NavLink className={({ isActive }) =>
+            `${css.headerItem} ${isActive ? css.active : ''}`
+          } to="/movies/:movieId">MovieDetails</NavLink></li>
                     </ul>
                 </nav>
             </header>
             <main>
                 {children}
             </main>
-            <footer>Copyright</footer>
+            
         </div>
     );
 }

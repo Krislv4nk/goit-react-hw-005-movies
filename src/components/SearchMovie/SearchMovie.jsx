@@ -1,27 +1,61 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getSearchMovies } from "services/API";
+import { Loader } from "components/Loader/Loader";
+import { STATUSES } from "helpers/constants";
 
-export const SearchMovie = () => {
+export const SearchMovie = (onSubmit) => {
   const [query, setQuery] = useState('');
-const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
+ const [status, setStatus] = useState(STATUSES.idle);
+
   const handleSearch = event => {
-    setQuery(event.target.value);
+    event.preventDefault();
+    setQuery(event.target.elements.query.value);
+    setMovies([]);
+    setStatus(STATUSES.idle);
+
   };
+  const handleSubmit = event => {
+    event.preventDefault();
+    onSubmit(query);
+    setQuery('');
+    setMovies([]);
+    setStatus(STATUSES.idle);
+
+  }
 useEffect(() => {
-    if (query !== '') {
-      getSearchMovies(query).then(data => setMovies(data.results));
-    }
-  }, [query]);
+  if (query !== '') {
+    setStatus(STATUSES.pending);
+    getSearchMovies(query).then(data => {
+      console.log(data);
+      setMovies(data.results);
+      setStatus(STATUSES.success);
+      if (data.results.length === 0) {
+        setStatus(STATUSES.error);
+      }
+
+    })
+    .catch(error => {
+        console.error('Error during fetch:', error);
+        setStatus(STATUSES.error);
+      });
+  }
+  
+}, [query]);
     return (
       <div>
-      <form>
+      <form onSubmit={handleSearch}>
         <input
-          type="text"
+            type="text"
+            name="query"
           value={query}
-          onChange={handleSearch}
+          onChange={event => setQuery(event.target.value)}
           placeholder="Search movie"
-        />
-      </form>
+          />
+          <button onClick={handleSubmit} type="submit">Search</button>
+        </form>
+        
+        {status === STATUSES.pending && <Loader />}
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>
