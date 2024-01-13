@@ -1,13 +1,13 @@
-import React from "react";
+// import React from "react";
 
-import{ SearchMovie } from "components/SearchMovie/SearchMovie";
+// import{ SearchMovie } from "components/SearchMovie/SearchMovie";
 
 
-const Movies = () => {
+// const Movies = () => {
   
   
-    return (
-        <SearchMovie />
-    );
-}
-export default Movies;
+//     return (
+//         <SearchMovie />
+//     );
+// }
+// export default Movies;
