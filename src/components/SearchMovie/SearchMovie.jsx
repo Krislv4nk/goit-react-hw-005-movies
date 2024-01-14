@@ -1,70 +1,67 @@
-import React, { useState, useEffect } from "react";
-import { getSearchMovies } from "services/API";
-import { Loader } from "components/Loader/Loader";
-import { STATUSES } from "helpers/constants";
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { getSearchMovies } from 'services/API';
+import { STATUSES } from 'helpers/constants';
+import { Loader } from 'components/Loader/Loader';
+import { MoviesList } from 'components/MoviesList/MoviesList';
+import css from './SearchMovie.module.css';
 
-export const SearchMovie = (onSubmit) => {
-  const [query, setQuery] = useState('');
+export const SearchMovie = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [status, setStatus] = useState(STATUSES.idle);
   const [movies, setMovies] = useState([]);
- const [status, setStatus] = useState(STATUSES.idle);
+   const [previousQuery, setPreviousQuery] = useState('');
 
-  const handleSearch = event => {
-    event.preventDefault();
-    setQuery(event.target.elements.query.value);
-    setMovies([]);
-    setStatus(STATUSES.idle);
+  const query = searchParams.get('sQuery');
 
+  useEffect(() => {
+    if (query && query.trim() !== '') {
+      setMovies([]);
+      setStatus(STATUSES.pending);
+      setPreviousQuery(query);
+      const searchMovieByQuery = async () => {
+        try {
+          const data = await getSearchMovies(query);
+           
+          if (Array.isArray(data.results)) {
+            setMovies(data.results);
+          } else {
+            setMovies([data]);
+          }
+          setStatus(STATUSES.success);
+         
+          } catch (error) {
+          
+          setStatus(STATUSES.error);
+        }
+      };
+      searchMovieByQuery();
+    }
+  }, [query]);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const searchValue = e.currentTarget.elements.query.value.trim();
+    setSearchParams({
+      sQuery: searchValue,
+    });
   };
-  const handleSubmit = event => {
-    event.preventDefault();
-    onSubmit(query);
-    setQuery('');
-    setMovies([]);
-    setStatus(STATUSES.idle);
 
-  }
-useEffect(() => {
-  if (query !== '') {
-    setStatus(STATUSES.pending);
-    getSearchMovies(query).then(data => {
-      console.log(data);
-      setMovies(data.results);
-      setStatus(STATUSES.success);
-      if (data.results.length === 0) {
-        setStatus(STATUSES.error);
-      }
-
-    })
-    .catch(error => {
-        console.error('Error during fetch:', error);
-        setStatus(STATUSES.error);
-      });
-  }
-  
-}, [query]);
-    return (
-      <div>
-      <form onSubmit={handleSearch}>
-        <input
-            type="text"
-            name="query"
-          value={query}
-          onChange={event => setQuery(event.target.value)}
+  return (
+    <div className={css.container}>
+      <form className={css.form} onSubmit={handleSearchSubmit}>
+        <input className={css.input}
+          type="text"
+          name="query"
           placeholder="Search movie"
-          />
-          <button onClick={handleSubmit} type="submit">Search</button>
-        </form>
-        
-        {status === STATUSES.pending && <Loader />}
-      <ul>
-        {movies.map(movie => (
-          <li key={movie.id}>
-            <h3>{movie.title}</h3>
-            <p>{movie.overview}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-    
-  );
+        />
+        <button className={css.button} type="submit">Search</button>
+      </form>
+  {previousQuery && <h2 className={css.previousQuery}>Your previous query: "{previousQuery}"</h2>}
+      {status === STATUSES.pending && <Loader />}
+    {status === STATUSES.success && <MoviesList movies={movies} />}
+    {status === STATUSES.idle && <div className={css.info}>Please, enter your query</div>}
+    {status === STATUSES.error && <div className={css.info}>Something went wrong...</div>}
+  </div>
+  )
 };

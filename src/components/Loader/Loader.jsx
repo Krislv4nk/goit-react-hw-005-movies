@@ -7,7 +7,8 @@ export const Loader = ({ status }) => {
 if (status !== STATUSES.pending) {
     return null;
   }
-    return (
+  return (
+      
       <div className={css.loader}>
       <DNA
   visible={true}
@@ -17,5 +18,6 @@ if (status !== STATUSES.pending) {
   wrapperStyle={{}}
   wrapperClass="dna-wrapper"
   />
-      </div>);
-  }
+    </div>);
+  
+}

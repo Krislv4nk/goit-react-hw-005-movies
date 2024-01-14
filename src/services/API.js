@@ -30,8 +30,9 @@ const options = {
 export const getSearchMovies = async (query) => {
   const options = {
   method: 'GET',
+  
   url: `${url}/search/movie`,
-  params: {language: 'en-US', api_key: apiKey},
+  params: {language: 'en-US', api_key: apiKey, query: query, page: '1'},
   headers: {
     accept: 'application/json',
     Authorization: `Bearer ${AUTH_KEY}`

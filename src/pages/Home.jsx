@@ -1,13 +1,13 @@
 
 import React from 'react';
-import  {MoviesList}  from 'components/moviesGallery/moviesGallery';
+import  {MoviesGallery}  from 'components/moviesGallery/moviesGallery';
 
 
 const Home = () => {
   
   return (
     <div>
-          <MoviesList/>
+          <MoviesGallery/>
     </div>
   );
 };
