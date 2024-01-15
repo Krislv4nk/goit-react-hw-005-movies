@@ -43,7 +43,7 @@ export const getSearchMovies = async (query) => {
   }
 };
   try {
-    const response = await axios.get(options);
+    const response = await axios(options);
     return response.data;
   }
   catch (error) {
@@ -70,8 +70,8 @@ export const getMovieInfo = async id => {
     }
   };
   try {
-   const response = await axios.get(`${url}/movie/${id}`, options);
-    return response.data;
+   const response = await axios.request(options);
+    return response;
  
   }
   catch (error) {
