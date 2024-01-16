@@ -1,6 +1,6 @@
 .movieDetails {
     background-color: rgb(114, 114, 117);
-    padding: 15px;
+    padding: 25px;
 }
 .title {
     text-align: center;
@@ -30,4 +30,5 @@
     background-color: rgb(78, 78, 80);
     transition: 0.5s;
     text-align: center;
+    border-radius: 5px;
 }

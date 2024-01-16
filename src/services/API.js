@@ -17,15 +17,10 @@ const options = {
     Authorization: `Bearer ${AUTH_KEY}`
   }
 };
-  try {
-    const  data = await axios.request(options);
+    const  data = await axios(options);
     return data;
-    
   }
-  catch (error) {
-    console.error('Error during fetch:', error);
-  }
-}
+
 
 
 
@@ -42,14 +37,10 @@ export const getSearchMovies = async (query) => {
     Authorization: `Bearer ${AUTH_KEY}`
   }
 };
-  try {
     const response = await axios(options);
     return response.data;
   }
-  catch (error) {
-    console.log('Error during fetch:',error);
-  }
-}
+  
 
 
 
@@ -58,7 +49,6 @@ export const getSearchMovies = async (query) => {
 
 
 export const getMovieInfo = async id => {
-  
   const options = {
     method: 'GET',
     url: `${url}/movie/${id}`,
@@ -69,16 +59,9 @@ export const getMovieInfo = async id => {
       Authorization: `Bearer ${AUTH_KEY}`
     }
   };
-  try {
-    const response = await axios.get( options);
-    console.log(response.data);
+    const response = await axios.request(options);
     return response.data;
- 
   }
-  catch (error) {
-    console.log('Error during fetch:',error);
-}
-}
 
   
   
@@ -95,13 +78,10 @@ export const getMovieCast = async (id) => {
       Authorization: `Bearer ${AUTH_KEY}`
     }
   };
-  try {
-  const data = await axios.get(`${url}/movie/${id}/credits`, options);
-  return data.cast;
-}catch (error) {
-  console.log('Error during fetch:',error);
-}
-}
+    const response = await axios.request(options);
+    return response.data.cast;
+  
+  }
 
 
 //  запит оглядів для сторінки кінофільму
@@ -118,10 +98,10 @@ export const getMovieReviews = async (id) => {
     }
   };
   try {
-  const { data } = await axios.get(`${url}/movie/${id}/reviews`, options);
-  return data.results;
+  const  response  = await axios.request( options);
+  return response.data.reviews;
 }
 catch (error) {
-  console.log('Error during fetch:',error);
+  console.log('Error during fetch:Reviews',error);
 }
 }

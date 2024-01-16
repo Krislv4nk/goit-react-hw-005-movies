@@ -21,12 +21,13 @@ const [movieDetails, setMovieDetails] = useState(null);
       }
     }
     fetchMovie();
-  }, [movieId]);
+  }, [movieId, setMovieDetails]);
   
   
     return (
         <div className={css.movieDetails}>
-          <Link to={backLinkRef.current}>Go back</Link>
+        <Link className={css.backLink} to={backLinkRef.current}>Go back</Link>
+         <h1 className={css.title}>Movie details</h1>
            {movieDetails && <MovieInfo movieDetails={movieDetails} />}
       </div>
     );

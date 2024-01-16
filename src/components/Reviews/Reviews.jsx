@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { getMovieReviews } from "services/API";
+import { useParams } from 'react-router-dom';
 
- const Reviews = ({ id }) => {
+ const Reviews = () => {
     const [reviews, setReviews] = useState([]);
-
+const { movieId } = useParams();
     useEffect(() => {
         const fetchReviews = async () => {
-            const response = await getMovieReviews(id);
+            const response = await getMovieReviews(movieId);
             setReviews(response);
         };
 
         fetchReviews();
-    }, [id]);
+    }, [movieId, setReviews]);
     return (
         <ul>
             {reviews.map((review) => (

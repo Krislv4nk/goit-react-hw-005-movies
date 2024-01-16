@@ -2,8 +2,6 @@
 import React from "react";
 import css from "./MovieInfo.module.css";
 import { NavLink, Outlet } from "react-router-dom";
-import  Cast  from "components/Cast/Cast";
-import  Reviews  from "components/Reviews/Reviews";
 
 export const MovieInfo = ({ movieDetails }) => {
   const {
@@ -14,12 +12,12 @@ export const MovieInfo = ({ movieDetails }) => {
     poster_path,
     genres,
   }
-  = movieDetails;
+  = movieDetails ;
 
 
   return (
-        <div className={css.movieDetails}>
-      <h1 className={css.title}>Movie details</h1>
+    <div >
+      <div className={css.movieDetails}>
       <img
         className={css.moviePoster}
         src={`https://image.tmdb.org/t/p/w500${poster_path}`}
@@ -27,10 +25,10 @@ export const MovieInfo = ({ movieDetails }) => {
       />
       <ul className={css.movieInfo}>
         <li className={css.movieTitle}>{title}</li>
-        <li>Release date: {release_date}</li>
-        <li>Rating: {vote_average}</li>
+        <li className={css.movieRelease}>Release date: {release_date}</li>
+        <li className={css.movieRating}>Rating: {vote_average}</li>
         <li className={css.movieOverview}>{overview}</li>
-        <li>
+        <li className={css.movieGenres}>
           Genres:{" "}
           {genres.map((genre) => (
             <span key={genre.id} className={css.genre}>
@@ -38,31 +36,27 @@ export const MovieInfo = ({ movieDetails }) => {
             </span>
           ))}
         </li>
-      </ul>
-       <Outlet />
+        </ul>
+        </div>
+      <h3>Additional information</h3>
+        
       <ul className={css.navList}>
         <li className={css.navLinkItem}>
-          <NavLink 
-            className={({ isActive }) =>
-              `${css.navLink} ${isActive ? css.active : ''}`
-            }
-            to="/movies/cast"
+          <NavLink className={ css.navLink }to="cast"
           >
-            <Cast movie={movieDetails}/>
+          Cast
           </NavLink>
         </li>
         <li className={css.navLinkItem}>
           <NavLink
-            className={({ isActive }) =>
-              `${css.navLink} ${isActive ? css.active : ''}`
-            }
-            to="/movies/reviews"
+            className={ css.navLink }
+            to="reviews"
           >
-            <Reviews movie={movieDetails}/>
+          Reviews
           </NavLink>
         </li>
-      </ul>
-      
+        </ul>
+    <Outlet />
     </div>
 )
   
