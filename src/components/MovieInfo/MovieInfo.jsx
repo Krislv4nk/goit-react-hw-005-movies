@@ -39,8 +39,7 @@ export const MovieInfo = ({ movieDetails }) => {
           ))}
         </li>
       </ul>
-      <Reviews movie={movieDetails}/>
-      <Cast movie={movieDetails}/>
+       <Outlet />
       <ul className={css.navList}>
         <li className={css.navLinkItem}>
           <NavLink 
@@ -49,7 +48,7 @@ export const MovieInfo = ({ movieDetails }) => {
             }
             to="/movies/cast"
           >
-            Cast
+            <Cast movie={movieDetails}/>
           </NavLink>
         </li>
         <li className={css.navLinkItem}>
@@ -59,10 +58,9 @@ export const MovieInfo = ({ movieDetails }) => {
             }
             to="/movies/reviews"
           >
-            Reviews
+            <Reviews movie={movieDetails}/>
           </NavLink>
         </li>
-        <Outlet />
       </ul>
       
     </div>
