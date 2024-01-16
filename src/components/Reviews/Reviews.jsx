@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getMovieReviews } from "services/API";
 
-export const Reviews = ({ id }) => {
+ const Reviews = ({ id }) => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
@@ -23,3 +23,4 @@ export const Reviews = ({ id }) => {
         </ul>
     );
 };
+export default Reviews;
