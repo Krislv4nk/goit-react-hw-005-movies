@@ -97,11 +97,12 @@ export const getMovieReviews = async (id) => {
       Authorization: `Bearer ${AUTH_KEY}`
     }
   };
+
   try {
-  const  response  = await axios.request( options);
-  return response.data.reviews;
-}
-catch (error) {
-  console.log('Error during fetch:Reviews',error);
-}
+    const response = await axios(options);
+    console.log(response.data);
+    return response.data.reviews;
+  } catch (error) {
+    console.error(error);
+  }
 }
