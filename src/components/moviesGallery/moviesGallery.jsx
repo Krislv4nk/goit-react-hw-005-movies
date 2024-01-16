@@ -9,7 +9,6 @@ import { STATUSES } from 'helpers/constants';
 export const MoviesGallery = () => {
   const [movies, setMovies] = useState([]);
     const [status, setStatus] = useState(STATUSES.idle);
-    
 
     useEffect(() => {
       setStatus(STATUSES.pending);
@@ -27,13 +26,16 @@ export const MoviesGallery = () => {
       .finally(() => {
         setStatus(STATUSES.idle);
       });
-  }, []);
+    }, []);
+  
     return (
       
         <div className={css.moviesListContainer}>
              {status === STATUSES.pending && <Loader status={status}/>}
       <h2 className={css.pageTitle}>Only trending today</h2>
-      <MoviesList movies={movies} />
+        <MoviesList movies={movies} />
+        
+
     </div>
   );
 };

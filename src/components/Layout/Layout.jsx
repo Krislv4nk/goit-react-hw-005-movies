@@ -15,6 +15,9 @@ export  const Layout = ({ children }) => {
                         <li ><NavLink className={({ isActive }) =>
             `${css.headerItem} ${isActive ? css.active : ''}`
           } to="/movies">Movies</NavLink></li>
+                        {/* <li ><NavLink className={({ isActive }) =>
+            `${css.headerItem} ${isActive ? css.active : ''}`
+          } to="/movies/:movieId">MovieDetails</NavLink></li> */}
                     </ul>
                 </nav>
             </header>
