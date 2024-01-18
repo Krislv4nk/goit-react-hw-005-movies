@@ -1,9 +1,10 @@
 
-import React from "react";
+import React, {Suspense} from "react";
 import css from "./MovieInfo.module.css";
 import { NavLink, Outlet } from "react-router-dom";
+import { Loader } from "components/Loader/Loader";
 
-export const MovieInfo = ({ movieDetails }) => {
+ const MovieInfo = ({ movieDetails }) => {
   const {
     title,
     release_date,
@@ -56,9 +57,12 @@ export const MovieInfo = ({ movieDetails }) => {
           </NavLink>
         </li>
         </ul>
-    <Outlet />
+        <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </div>
 )
   
-}
+}  
+export default MovieInfo;
 

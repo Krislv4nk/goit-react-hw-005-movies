@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef } from "react";
 import { useParams } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { getMovieInfo } from "../services/API";
-import { MovieInfo } from "components/MovieInfo/MovieInfo";
+import  MovieInfo  from "components/MovieInfo/MovieInfo";
 import css from "./MovieDetails.module.css";
 
 

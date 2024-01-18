@@ -1,6 +1,7 @@
-import React from "react";
-import { NavLink } from 'react-router-dom';
+import React, { Suspense} from "react";
+import { NavLink, Outlet } from 'react-router-dom';
 import css from './Layout.module.css';
+import { Loader } from "components/Loader/Loader"
 
 
 export  const Layout = ({ children }) => {
@@ -18,6 +19,11 @@ export  const Layout = ({ children }) => {
                         {/* <li ><NavLink className={({ isActive }) =>
             `${css.headerItem} ${isActive ? css.active : ''}`
           } to="/movies/:movieId">MovieDetails</NavLink></li> */}
+          <Suspense
+          fallback={<Loader/>}
+        >
+          <Outlet />
+        </Suspense>
                     </ul>
                 </nav>
             </header>
