@@ -2,7 +2,6 @@ import React from "react";
 import { Link, useLocation} from "react-router-dom";
 import css from "./MoviesList.module.css";
 
-
 export const MoviesList = ({ movies,id }) => {
   const location = useLocation();
 

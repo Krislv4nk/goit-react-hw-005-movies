@@ -72,14 +72,14 @@ export const getMovieCast = async (id) => {
     method: 'GET',
     url: `${url}/movie/${id}/credits`,
     params: {
-      language: 'en-US'},
+      language: 'en-US', аpi_key: apiKey},
     headers: {
       accept: 'application/json',
       Authorization: `Bearer ${AUTH_KEY}`
     }
   };
-    const response = await axios.request(options);
-    return response.data.cast;
+    const {data} = await axios.request(options);
+    return data.cast;
   
   }
 
@@ -91,18 +91,13 @@ export const getMovieReviews = async (id) => {
     method: 'GET',
     url: `${url}/movie/${id}/reviews`,
     params: {
-      language: 'en-US'},
+      language: 'en-US',  page: '1'},
     headers: {
       accept: 'application/json',
       Authorization: `Bearer ${AUTH_KEY}`
     }
   };
 
-  try {
-    const response = await axios(options);
-    console.log(response.data);
-    return response.data.reviews;
-  } catch (error) {
-    console.error(error);
-  }
+    const {data} = await axios.request(options);
+    return data.results;
 }

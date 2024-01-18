@@ -2,19 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { getMovieCast } from "../../services/API";
 import css from './Cast.module.css';
-
+import {defaultImg} from '../../helpers/constants';
 
 const Cast = () => {
     const [cast, setCast] = useState([]);
      const { movieId } = useParams();
-    useEffect(() => {
+     useEffect(() => {
         const fetchCast = async () => {
-            const response = await getMovieCast(movieId);
-            setCast(response);
+            try {
+                const cast = await getMovieCast(movieId);
+                setCast(cast);
+            } catch (error) {
+                console.error('Error:', error);
+            }
         };
-
+    
         fetchCast();
     }, [movieId, setCast]);
+    
 
     return (
         <div className={css.castContainer}>
@@ -24,7 +29,10 @@ const Cast = () => {
                 <div key={id}>
                     <img className={css.castImg}
               src={
-                   `https://image.tmdb.org/t/p/w200${profile_path}`}
+                profile_path
+                  ? `https://image.tmdb.org/t/p/w200${profile_path}`
+                  : defaultImg
+              }
               alt={name}
               width={208}
               height={300}
@@ -38,3 +46,4 @@ const Cast = () => {
     );
 };
 export default Cast;
+
