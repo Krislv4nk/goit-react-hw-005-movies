@@ -38,7 +38,7 @@ export const MovieInfo = ({ movieDetails }) => {
         </li>
         </ul>
         </div>
-      <h3>Additional information</h3>
+      <h3 className={css.title}>Additional information</h3>
         
       <ul className={css.navList}>
         <li className={css.navLinkItem}>

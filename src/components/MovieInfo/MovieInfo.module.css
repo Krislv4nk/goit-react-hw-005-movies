@@ -44,6 +44,12 @@
 .navList {
     display: flex;
     gap : 30px;
+    justify-content: center;
+    align-items: center;
+}
+.title {
+    text-align: center;
+    padding: 20px;
 }
 .navLinkItem {
     padding: 5px;
