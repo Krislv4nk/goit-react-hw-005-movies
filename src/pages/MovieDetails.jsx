@@ -28,7 +28,7 @@ useEffect(() => {
     }
   };
   fetchMovie();
-}, [movieId, setMovieDetails]);
+}, [movieId]);
 
   
   

@@ -26,8 +26,6 @@ const Movies = () => {
           const data = await getSearchMovies(query);
           if (Array.isArray(data.results)) {
             setMovies(data.results);
-          } else {
-            setMovies([data]);
           } 
         } catch (error) {
           setError(error);

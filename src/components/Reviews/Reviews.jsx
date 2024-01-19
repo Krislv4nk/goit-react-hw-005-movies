@@ -22,7 +22,7 @@ const Reviews = () => {
     
     return (
         <div>
-            {results && results.length !==0? <h2>Reviews</h2>: results.length === 0 && <p>We don't have any reviews for this movie</p>}
+            { results.length === 0 && <p className={css.info}>We don't have any reviews for this movie</p>}
                 <ul className={css.Reviews}>
                     {results.map(({ id, author, content }) => {
                         return (

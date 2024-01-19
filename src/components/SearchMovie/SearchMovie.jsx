@@ -1,11 +1,11 @@
 import React from 'react';
 import css from './SearchMovie.module.css';
 
-export const SearchMovie = (handleSearchSubmit) => {
+export const SearchMovie =  ({onSubmit}) => {
 
   return (
     <div className={css.container}>
-      <form className={css.form} onSubmit={(e) => handleSearchSubmit(e)}>
+     <form className={css.form} onSubmit={(e) => onSubmit(e)}>
         <input className={css.input}
           type="text"
           name="query"

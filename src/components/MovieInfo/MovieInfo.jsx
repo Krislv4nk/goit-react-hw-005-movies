@@ -3,6 +3,7 @@ import React, {Suspense} from "react";
 import css from "./MovieInfo.module.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { Loader } from "components/Loader/Loader";
+import {defaultImg} from "helpers/constants"
 
  const MovieInfo = ({ movieDetails }) => {
   const {
@@ -21,7 +22,11 @@ import { Loader } from "components/Loader/Loader";
       <div className={css.movieDetails}>
       <img
         className={css.moviePoster}
-        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+        src={
+          poster_path
+            ? `https://image.tmdb.org/t/p/w200${poster_path}`
+            : defaultImg
+        }
         alt={title}
       />
       <ul className={css.movieInfo}>

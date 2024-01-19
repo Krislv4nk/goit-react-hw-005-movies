@@ -18,12 +18,11 @@ const Cast = () => {
         };
     
         fetchCast();
-    }, [movieId, setCast]);
+    }, [movieId]);
     
 
     return (
         <div className={css.castContainer}>
-            <h2>Cast</h2>
             <ul className={css.castList}><li className={css.castItem}>
             {cast.map(({ id, name, profile_path, character }) => (
                 <div key={id}>
