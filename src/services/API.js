@@ -59,8 +59,8 @@ export const getMovieInfo = async id => {
       Authorization: `Bearer ${AUTH_KEY}`
     }
   };
-    const response = await axios.request(options);
-    return response.data;
+    const {data} = await axios.request(options);
+    return data;
   }
 
   
